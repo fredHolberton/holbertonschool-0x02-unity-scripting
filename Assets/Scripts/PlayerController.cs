@@ -4,18 +4,22 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    // Speed of the sphere mouvement
+    // Speed of the player mouvement
     public float speed;
+
+    // health of the player
+    public int health;
 
     private Rigidbody rb;
     private float vertical;
     private float horizontal;
-    private int score = 0;
+    private int score;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        score = 0;
     }
 
     // Update is called once per frame
@@ -35,6 +39,12 @@ public class PlayerController : MonoBehaviour
             score += 1;
             Debug.Log("Score: " + score);
             other.gameObject.SetActive(false);
+        }
+
+        if (other.gameObject.tag == "Trap")
+        {
+            health -= 1;
+            Debug.Log("Health: " + health);
         }
     }
 }
